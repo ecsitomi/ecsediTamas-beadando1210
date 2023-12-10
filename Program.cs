@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Tls;
 
 namespace ecsediTamas_beadando1210
 {
@@ -31,6 +32,7 @@ namespace ecsediTamas_beadando1210
                     {
                         Tag tag = new Tag(dr.GetInt32("azon"),dr.GetString("nev"),dr.GetInt32("szulev"),dr.GetInt32("irszam"),dr.GetString("orsz"));
                         //Console.WriteLine(tag);
+                        HozzaAd(tag);
 
                     }
                 }
@@ -42,6 +44,30 @@ namespace ecsediTamas_beadando1210
                 Environment.Exit(0);
             }
 
+            Megmutat();
+            Tag ujtag = new Tag(999, "Ecsedi Tamás", 1990, 3300, "Magyarország");
+
+            HozzaAd(ujtag);
+            Megmutat();
+
+            Torol(ujtag);
+            Megmutat();
+
+        }
+        static void HozzaAd(Tag tag)
+        { 
+            lista.Add(tag);
+        }
+        static void Megmutat()
+        {
+            foreach (var tag in lista)
+            {
+                Console.WriteLine(tag.nev);
+            }
+        }
+        static void Torol(Tag tag)
+        { 
+            lista.Remove(tag);
         }
     }
 }
